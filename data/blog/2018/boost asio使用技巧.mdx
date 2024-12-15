@@ -3,7 +3,7 @@ title: 'boost asio使用技巧'
 date: '2018-06-15'
 tags: ['C/C++', 'Boost']
 draft: false
-summary: 
+summary: '本文介绍了Boost.Asio库的使用技巧和基本概念，涵盖I/O服务、Proactor模型、缓冲区管理、I/O对象、信号处理、定时器和strand的使用方法，帮助读者高效开发高并发的网络服务器程序。'
 ---
 
 最近尝试使用了一下Boost.Asio，不知道是否因为各大公司都有自己相对成熟的网络库的缘故，网络上Asio相关的资料实在不多，而且很多翻来覆去就是那几个简单的示例，所以打算自己小结一下。总的来说Boost.Asio是个非常易用的库，避免了你在各种系统底层API之间的挣扎，让你可以非常迅速的开发出高并发的网络服务器程序。
@@ -75,7 +75,7 @@ post()和dispatch()都是要求io_service执行一个handler，但是dispatch()�
 # buffer类
 buffer类分mutable_buffer和const_buffer两个类，buffer类特别简单，仅有两个成员变量：指向数据的指针 和 相应的数据长度。buffer类本身并不申请内存，只是提供了一个对现有内存的封装。
 
-需要注意的是，所有async_write()、async_read()之类函数接受的buffer类型是 MutableBufferSequence / ConstBufferSequence，这意味着它们既可以接受boost::asio::buffer，也可以接受 std::vector<boost::asio::buffer> 这样的类型。
+需要注意的是，所有async_write()、async_read()之类函数接受的buffer类型是 MutableBufferSequence / ConstBufferSequence，这意味着它们既可以接受boost::asio::buffer，也可以接受 ```std::vector<boost::asio::buffer> ```这样的类型。
 
 # 缓冲区管理
 缓冲区的生命期是使用asio最需要重视的两件事之一，缓冲区之所以需要重视的原因在于Asio异步调用Reference里的这段描述：
@@ -83,7 +83,7 @@ buffer类分mutable_buffer和const_buffer两个类，buffer类特别简单，仅
 
 这意味着缓冲区从发起异步调用到handler被执行，这段时间内需要交由io_service控制，这个限制常常导致asio的某些代码变得可能比Reactor相应代码还要麻烦一些。
 
-还是举上面聊天室的那个例子。chat_client.cpp 的do_write()函数收到用户输入数据后，之所以把该数据保存到std::deque<std::string> write_msgs_ 队列，而不是存到类似char data[]的数组里，然后去调用async_write(..data..)发送数据，是为了避免这种情况：输入数据速度过快，当上一次async_write()调用的handler还没有来得及处理，又收到一份新的数据，如果直接保存到data，会导致覆盖上一次async_write()的缓冲区。async_write()要求这个缓冲区从调用async_write()开始，直到handler处理这个时间段是不变的。
+还是举上面聊天室的那个例子。chat_client.cpp 的do_write()函数收到用户输入数据后，之所以把该数据保存到```std::deque<std::string> write_msgs_ ```队列，而不是存到类似char data[]的数组里，然后去调用async_write(..data..)发送数据，是为了避免这种情况：输入数据速度过快，当上一次async_write()调用的handler还没有来得及处理，又收到一份新的数据，如果直接保存到data，会导致覆盖上一次async_write()的缓冲区。async_write()要求这个缓冲区从调用async_write()开始，直到handler处理这个时间段是不变的。
 
 同样的，在do_write()函数里调用async_write()函数之前，先判断write_msgs_队列是否为空，也是为了保证async_write()总是从write_msgs_队列头取得有效的数据，而在handle_write()里当数据发送完毕后，再pop_front()弹出已经发送的数据包。以此避免出现前一个async_write()的handler还没执行完毕，就把队列头弹出去，导致对应的缓冲区失效问题。
 
