@@ -1,0 +1,31 @@
+---
+title: 'mysql CPU一直占用过高'
+date: '2019-02-19'
+tags: ['Linux', 'Database']
+draft: false
+summary: 
+---
+
+mysql CPU一直占用过高
+
+*简单解决方法*  
+
+1> 登录mysql
+```
+mysql -uroot -p  
+输入密码  
+```
+
+2> 显示处理的列表
+```
+show processlist;
+```
+发现某个Query的状态是sending data，一直卡在这里
+
+3> kill掉查询ID
+```
+kill 4357
+```
+再次查看mysqld的CPU占用率是不是下来了
+
+当然，这只是个快速的临时的解决方法，具体原因还要具体分析！！！

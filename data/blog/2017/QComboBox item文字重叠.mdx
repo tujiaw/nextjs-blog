@@ -1,0 +1,14 @@
+---
+title: 'QComboBox item文字重叠'
+date: '2017-03-15'
+tags: ['Qt']
+draft: false
+summary: 
+---
+
+当给QComboBox设置行交替使用不同颜色后，两个相邻的item文字有重叠
+```
+ui.comboBox->view()->setAlternatingRowColors(true);
+```
+解决方法：
+> 在Qt Designer中给comboBox的字体点大小设置为当前实际要展示的文字大小，默认为9，如果我们的文字要显示12px，将其改为12。

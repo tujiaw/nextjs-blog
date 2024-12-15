@@ -1,0 +1,17 @@
+---
+title: 'react native 配置方面的问题汇总'
+date: '2017-08-20'
+tags: ['Web']
+draft: false
+summary: 
+---
+
+# unable to load script from assets index.android.bundle
+* (in project directory) mkdir android/app/src/main/assets
+* react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+* react-native run-android
+
+# Could not connect to development server
+如果是真机调试，在命令行中执行如下命令：
+adb reverse tcp:8081 tcp:8081
+> 注意，如果命令行中找不到这个命令，可以cd到Android\sdk\platform-tools目录下再执行

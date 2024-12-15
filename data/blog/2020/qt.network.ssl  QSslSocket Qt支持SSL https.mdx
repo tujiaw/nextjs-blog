@@ -1,0 +1,16 @@
+---
+title: 'qt.network.ssl  QSslSocket Qt支持SSL https'
+date: '2020-09-08'
+tags: ['Qt']
+draft: false
+summary: 
+---
+
+Qt使用QNetworkAccessManager类时默认是不支持https协议的，需要增加openssl动态库。
+
+我发现新版本的Qt和老版本的Qt所需要的openssl库的名字竟然不一样。
+
+老的是：libeay32.dll、ssleay32.dll  
+新的是：libcrypto-1_1.dll、libssl-1_1.dll
+
+具体的文件可以在QtCreator包里面去找。

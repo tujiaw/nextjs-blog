@@ -1,0 +1,36 @@
+---
+title: '遍历文件夹下的所有文件'
+date: '2017-04-15'
+tags: ['Windows', 'C/C++']
+draft: false
+summary: 
+---
+
+```
+ int GetCustomerName(LPCTSTR szCustomerPath, CString strFileName[])
+	{
+		int nFileCount = 0;
+		WIN32_FIND_DATA finder;
+		CString strCustomerFile(szCustomerPath);
+		strCustomerFile += L"//*.txt";
+		HANDLE hFind = ::FindFirstFile(strCustomerFile, &finder);
+		if (INVALID_HANDLE_VALUE == hFind)
+		{
+			nFileCount = 0;
+		}
+		else
+		{
+			do
+			{
+				strFileName[nFileCount] = finder.cFileName;
+				FILETIME fileTime = finder.ftCreationTime;
+				
+				nFileCount++;
+			}while(::FindNextFile(hFind, &finder) != 0);
+		}
+		::FindClose(hFind);
+		return nFileCount;
+	}
+
+    ```
+> （迁移2011-05-08）

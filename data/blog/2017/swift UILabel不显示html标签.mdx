@@ -1,0 +1,13 @@
+---
+title: 'swift UILabel不显示html标签'
+date: '2017-06-10'
+tags: ['Mobile']
+draft: false
+summary: 
+---
+
+带html标签的文本srcText  
+```
+var attrStr = NSAttributedString(data: srcText.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil, error: nil)
+```
+label.attributedText = attrStr

@@ -1,0 +1,36 @@
+---
+title: 'mysql备份、恢复表'
+date: '2019-08-23'
+tags: ['Database']
+draft: false
+summary: 
+---
+
+# 备份恢复单个表
+## dump
+```
+mysqldump db_name table_name > table_name.sql
+```
+## 远程dump
+```
+mysqldump -u <db_username> -h <db_host> -p db_name table_name > table_name.sql
+```
+## 恢复
+```
+mysql -u <user_name> -p db_name
+mysql> source <full_path>/table_name.sql
+```
+或者，一行的写法
+```
+mysql -u username -p db_name < /path/to/table_name.sql
+```
+
+# 备份恢复压缩表
+## dump
+```
+mysqldump db_name table_name | gzip > table_name.sql.gz
+```
+## restore
+```
+gunzip < table_name.sql.gz | mysql -u username -p db_name
+```

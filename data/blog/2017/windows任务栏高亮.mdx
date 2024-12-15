@@ -1,0 +1,32 @@
+---
+title: 'windows任务栏高亮'
+date: '2017-06-10'
+tags: ['Windows', 'C/C++']
+draft: false
+summary: 
+---
+
+```
+void startAlert(HWND hwnd, int durationMs, int timeoutMs)
+{
+    FLASHWINFO info;
+    info.cbSize = sizeof(info);
+    info.hwnd = hwnd;
+    info.dwFlags = FLASHW_TRAY;
+    info.dwTimeout = timeoutMs;
+    info.uCount = durationMs == 0 ? 10 : durationMs / timeoutMs;
+    FlashWindowEx(&info);
+}
+
+void stopAlert(HWND hwnd)
+{
+    FLASHWINFO info;
+    info.cbSize = sizeof(info);
+    info.hwnd = hwnd;
+    info.dwFlags = FLASHW_STOP;
+    info.dwTimeout = 0;
+    info.uCount = 0;
+    FlashWindowEx(&info);
+}
+
+```

@@ -1,0 +1,16 @@
+---
+title: 'DeprecationWarning  Mongoose  mpromise is deprecated'
+date: '2017-01-08'
+tags: ['Node.js']
+draft: false
+summary: 
+---
+
+var mongoose = require('mongoose');  mongoose.Promise = global.Promise;  ...
+---
+#### 去掉这个警告的方法：
+---
+```
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+```

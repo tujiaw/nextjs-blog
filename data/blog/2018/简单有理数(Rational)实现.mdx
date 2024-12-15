@@ -1,0 +1,74 @@
+---
+title: '简单有理数(Rational)实现'
+date: '2018-06-02'
+tags: ['C/C++']
+draft: false
+summary: 
+---
+
+```
+class Rational {
+public:
+	Rational(int a = 0, int b = 1) 
+		: a_(a), b_(b)
+	{
+
+	}
+
+	Rational(const Rational &rhs)
+		: a_(rhs.a()), b_(rhs.b())
+	{
+	}
+
+	const Rational operator=(const Rational& rhs)
+	{
+		return Rational(rhs.a_, rhs.b_);
+	}
+
+	double val() const
+	{
+		return a_*1.0 / b_;
+	}
+
+	int a() const
+	{
+		return a_;
+	}
+
+	int b() const
+	{
+		return b_;
+	}
+
+private:
+	int a_;
+	int b_;
+};
+
+const Rational operator+(const Rational &lhs, const Rational &rhs)
+{
+	return Rational(lhs.a() + rhs.a(), lhs.b() + rhs.b());
+}
+const Rational operator-(const Rational &lhs, const Rational &rhs)
+{
+	return Rational(lhs.a() - rhs.a(), lhs.b() - rhs.b());
+}
+const Rational operator*(const Rational &lhs, const Rational &rhs)
+{
+	return Rational(lhs.a() * rhs.a(), lhs.b() * rhs.b());
+}
+const Rational operator/(const Rational &lhs, const Rational &rhs)
+{
+	return Rational(lhs.a() / rhs.a(), lhs.b() / rhs.b());
+}
+
+bool operator==(const Rational &lhs, const Rational &rhs)
+{
+	return lhs.val() == rhs.val();
+}
+
+bool operator!=(const Rational &lhs, const Rational &rhs)
+{
+	return !(lhs == rhs);
+}
+```

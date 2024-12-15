@@ -1,0 +1,18 @@
+---
+title: 'mongoose分页查询'
+date: '2017-01-08'
+tags: ['Node.js', 'MongoDB']
+draft: false
+summary: 
+---
+
+PAGE_COUNT：每个页面的item数  
+page：当前页面标号
+
+```
+schema.find(query)  
+.skip(PAGE_COUNT * (page - 1))  
+.limit(PAGE_COUNT)  
+.sort({ _id: -1 })  
+.exec();
+```

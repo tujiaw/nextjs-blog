@@ -1,0 +1,26 @@
+---
+title: '给mongodb服务增加认证'
+date: '2020-04-19'
+tags: ['MongoDB']
+draft: false
+summary: 
+---
+
+在连接mongodb的时候增加用户名和密码认证，如你需要访问nodeblog库进行认证。
+
+将数据库配置改为不需要认证的方式启动 noauth:true
+```
+./mongod # 进入本地数据库
+use nodeblog #切换到nodeblog
+db.createUser({user:"lion", pwd:"lion", roles:[{role: "readWrite", db: "nodeblog"}]})
+exit
+```
+将数据库配置改为使用认证的方式启动 auth:true
+
+客户端连接方式：  
+go语言使用mgo框架连接：mongodb://lion:lion@*.*.*.*:27017/nodeblog  
+Studio 3T工具连接设置：  
+Authentication Mode：Legacy(SCRAM-SHA-1)  
+User name: lion  
+Password: lion  
+Authentication DB: nodeblog
