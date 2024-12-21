@@ -118,7 +118,7 @@ memcpy，memset有很强的限制，仅能用于POD结构，不能作用于stl�
 因为sprintf的函数实现里是按格式化串从栈上取参数，任何不一致，都有可能引起不可预知的错误； /usr/include/inttypes.h里定义了跨平台的格式化符号，比如PRId64用于格式化int64\_t
 
 **十一、stl容器的遍历删除要小心迭代器失效，vector、list、map、set等各有不同的写法**
-```
+```C++
    #include <vector>
    #include <map>
    #include <iterator>

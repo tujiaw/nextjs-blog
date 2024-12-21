@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 简单的解决方法改个名字就可以了（还有一种方法最后再说），但是这样编译的时候又会造成一个问题，重复定义。
 
 hello2.obj : error LNK2005: "public: __thiscall Hello::Hello(void)" (??0Hello@@QAE@XZ) 已经在 hello.obj 中定义
-加命名空间就可以了，如：temp1中的hello在namespace temp1 { ... }中，temp2中的hello在namespace temp2{ ... }中。
+加命名空间就可以了，如：temp1中的hello在```namespace temp1 { ... }```中，temp2中的hello在```namespace temp2{ ... }```中。
 
 这样问题就都解决了，如main.cpp代码如下，运行输出结果就是对的。
 ```

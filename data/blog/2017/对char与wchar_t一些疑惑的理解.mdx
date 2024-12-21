@@ -22,7 +22,7 @@ memcpy_a(dst, src, wcslen(src) *sizeof(src[0])); //正确
 memcpy_a(dst, src, sizeof(src)); //如果是数组的话可以，当然如果数组退化为了指针是不行的
 ```
 
-最后，如果用宽字符函数输出汉字的话要包含头文件#include <locale.h>，在main函数下起始处::setlocale(LC_ALL, "Chs");
+最后，如果用宽字符函数输出汉字的话要包含头文件```#include <locale.h>```，在main函数下起始处```::setlocale(LC_ALL, "Chs");```
 ```
 #include <stdio.h>
 #include <locale.h>
