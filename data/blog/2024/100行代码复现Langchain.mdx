@@ -3,7 +3,7 @@ title: '100行代码复现Langchain'
 date: '2024-02-26'
 tags: ['LLM']
 draft: false
-summary: 
+summary: 本文通过约100行代码复现了LangChain的核心功能，展示了如何利用LLM（如GPT）和工具（如搜索引擎、计算器）构建智能对话界面。作者详细介绍了从问题解析、工具调用到结果反馈的实现过程，并探讨了其背后的提示设计与推理机制。尽管简单，该实现已能处理多轮对话和复杂查询，但也揭示了当前技术的局限性。
 ---
 
 [LangChain](https://github.com/hwchase17/langchain) 已成为一个非常流行的工具包，用于构建各种由LLM支持的应用程序，包括聊天、问答和文档搜索。 在这篇博文中，我重新实现了一些新颖的 LangChain 功能作为学习，查看它用于创建这些高级功能的低级提示。
@@ -22,7 +22,7 @@ summary:
 LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建复杂的对话界面，使用各种工具（例如 Google 搜索、计算器）来回答问题。 这种方法克服了使用LLM回答问题的一些最重要的问题； 产生幻觉的倾向（创造可信但完全错误的答案），以及缺乏最新数据（由于他们的训练有截止日期）。 从广义上讲，通过代理模型，LLM成为一个协调者，提出问题，将其分解成块，然后使用适当的工具来组合答案。
 
 深入研究LangChain代码库，我们发现这个编排是通过以下提示执行的：
-
+```
     Answer the following questions as best you can. You have access to the following tools:
     
     search: a search engine. useful for when you need to answer questions about current events. input should be a search query.
@@ -43,7 +43,7 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
     
     Question: ${question}
     Thought:
-
+```
 这是令人着迷的东西！ 该提示分为几个部分：
 
 *   明确表达总体目标“回答以下问题……”
@@ -58,7 +58,7 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
 不管怎样，按照承诺，我们将重新实现LangChain。 那么让我们执行上面的提示。
 
 以下代码发送上述提示，并提出问题“昨天 SF 的高温是多少华氏度？” 通过 OpenAI API 升级到 GPT-3.5：
-
+```
     import fs from "fs";
     
     // construct the prompt, using our question
@@ -87,7 +87,7 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
     
     const response = await completePrompt(promptWithQuestion);
     console.log(response.choices[0].text);
-
+```
 最终的完成结果（至少当我运行它时！）如下：
 
     Question: What was the high temperature in SF yesterday in Fahrenheit?
@@ -111,7 +111,7 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
 随着完成在正确的点停止，我们现在需要创建我们的第一个“工具”，它执行 Google 搜索。 我将使用 [SerpApi](https://serpapi.com/) 来抓取 Google，以简单的 SON 格式提供响应。
 
 以下定义了我们的工具。 这里只有一个，名为 `search`：
-
+```
     const googleSearch = async (question) =>
       await fetch(
         `https://serpapi.com/search?api_key=${process.env.SERPAPI_API_KEY}&q=${question}`
@@ -127,11 +127,11 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
         execute: googleSearch,
       },
     };
-
+```
 `execute`函数使用 SerpApi，在本例中依赖于通过页面的“答案框”组件可见的结果。 这是让 Google 提供答案而不仅仅是网页结果列表的巧妙方法。
 
 更新提示模板以动态添加工具：
-
+```
     let prompt = promptTemplate
       .replace("${question}", question)
       .replace("${tools}",
@@ -139,9 +139,9 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
           .map((toolname) => `${toolname}: ${tools[toolname].description}`)
           .join("\n")
       );
-
+```
 现在，有趣的部分是，我们希望基于给定的操作迭代执行工具，为它们提供操作输入，并将结果作为观察附加到提示中。 此过程将持续进行，直到 LLM 协调器确定其拥有足够的信息并返回最终答案：
-
+```
     const answerQuestion = async (question) => {
       
       let prompt = // ... see above
@@ -163,13 +163,13 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
         }
       }
     };
-
+```
 让我们试一下：
-
+```
     const answer = await
         answerQuestion("What was the temperature in Newcastle (England) yesterday?")
     console.log(answer)
-
+```
 当我运行上面的内容时，给出的答案是“纽卡斯尔（英格兰）昨天的最高气温是 56°F，最低气温是 46°F。”，这是完全正确的。
 
 查看迭代增长的提示，我们可以看到工具调用链：
@@ -190,7 +190,7 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
 ---------
 
 让我们通过添加一个计算器工具来使其更强大
-
+```
     import { Parser } from "expr-eval";
     
     const tools = {
@@ -203,7 +203,7 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
         execute: (input) => Parser.evaluate(input).toString(),
       },
     };
-
+```
 通过 [expr-eval](https://blog.scottlogic.com/2023/05/04/langchain-mini.html#:~:text=With%20the%20expr%2Deval%20module%20doing%20all%20the%20hard%20work%2C%20this%20is%20an%20easy%20addition%2C%20and%20the%20we%20can%20now%20do%20some%20maths.%20Again%2C%20looking%20at%20the%20prompt%20to%20understand%20the%20internal%20workings%2C%20rather%20than%20just%20look%20at%20the%20result%3A) 模块完成所有艰苦的工作，这是一个简单的添加，我们现在可以做一些数学运算。 再次强调，查看提示来了解内部工作原理，而不是仅仅查看结果：
 
     Question: what is the square root of 25?
@@ -244,16 +244,16 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
 如何使用 GPT 实现这一目标并不是立即显而易见的，交互是无状态的，你提供提示，模型提供完成。 创建长时间运行的对话需要一些非常聪明的提示工程。 深入研究LangChain我发现它使用了一种有趣的技术......
 
 以下提示需要聊天历史记录和后续问题，要求 GPT 将问题改写为独立问题：
-
+```
     Given the following conversation and a follow up question, rephrase the
     follow up question to be a standalone question.
     Chat History:
     ${history}
     Follow Up Input: ${question}
     Standalone question:
-
+```
 以下代码使用我们之前的 `answerQuestion` 函数，将其包装在允许正在进行的对话的进一步循环中。 每次迭代时，聊天历史记录都会附加到“日志”中，并使用上述提示来确保每个后续问题作为独立问题运行。
-
+```
     const mergeTemplate = fs.readFileSync("merge.txt", "utf8");
     
     // merge the chat history with a new question
@@ -275,7 +275,7 @@ LangChain我最感兴趣的具体部分是Agent模型。 该 API 允许你创建
       console.log(answer);
       history += `Q:${question}\nA:${answer}\n`;
     }
-
+```
 让我们看看前面示例中的合并过程，其中用户首先询问“昨天 SF 的高温是多少华氏度？” 接下来是“摄氏温度是多少？”。
 
 当被问到第一个问题时，LLM协调员搜索了谷歌并回答“昨天，旧金山的高温是 54°F”。 这就是聊天历史记录的合并方式，以便后续问题变得独立：

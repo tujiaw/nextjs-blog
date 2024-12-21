@@ -3,7 +3,7 @@ title: '解决微信公众号文章中的图片不能显示的问题'
 date: '2024-02-15'
 tags: ['Web']
 draft: false
-summary: 
+summary: 本文介绍了微信公众号文章中图片无法正常显示的原因及解决方法。原因是微信图片服务器通过检查HTTP请求头中的Referer字段来防止其他网站盗用图片资源（防盗链）。当Referer不是微信域名时，服务器会返回提示图片。解决方法是在HTML头部添加`<meta name="referrer" content="never">`，但这可能影响数据分析、SEO和某些网站功能，需权衡隐私与这些潜在问题。
 ---
 
 # 问题

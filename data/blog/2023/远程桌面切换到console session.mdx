@@ -3,7 +3,7 @@ title: '远程桌面切换到console session'
 date: '2023-04-22'
 tags: ['Windows']
 draft: false
-summary: 
+summary: 本文介绍了如何在使用第三方远程桌面软件连接公司电脑时，解决物理控制台无显示的问题。原因是微软远程桌面（RDP）会创建独立的会话，默认不显示在物理控制台上，而其他软件如 TeamViewer 无法直接输出到物理屏幕。通过使用 `tscon` 命令将远程会话转换为 console session，可以实现在物理控制台上查看远程桌面输出。具体步骤包括使用 `query user` 查看会话ID，并执行 `tscon <session ID> /dest:console` 进行转换。
 ---
 
 我用vpn连到公司内网，然后通过mstsc远程桌面连到公司内网机器。我想关掉vpn这样就不能用微软的远程桌面了，所以我先起了一个第三方的远程桌面软件，这样关闭vpn和微软的远程桌面，就可以用第三方的远程桌面在家里连接公司电脑了。
@@ -16,7 +16,7 @@ summary:
 
 再次使用微软的远程桌面，在远程机器上操作：
 输入 query user 命令，查看当前所有用户的 session ID。
-输入 tscon <session ID> /dest:console 命令，将指定的 session ID 转换为 console session。其中，<session ID> 是需要转换的 session 的 ID 号，/dest:console 表示将 session 转换为 console session。
+输入 ```tscon <session ID> /dest:console ```命令，将指定的 session ID 转换为 console session。其中，```<session ID> ```是需要转换的 session 的 ID 号，/dest:console 表示将 session 转换为 console session。
 
 这样软件桌面会断开，再使用第三方软件桌面软件去连接就可以了。
 

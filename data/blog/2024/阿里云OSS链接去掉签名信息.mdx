@@ -3,7 +3,7 @@ title: '阿里云OSS链接去掉签名信息'
 date: '2024-12-07'
 tags: ['Web']
 draft: false
-summary: 
+summary: 本文介绍了如何去掉阿里云OSS链接中的签名信息，通过将Object设置为公共读权限（`oss2.OBJECT_ACL_PUBLIC_READ`），使链接公开且无时间限制。此操作虽简化了URL生成，但可能增加访问量和成本，需谨慎考虑。文章提供了上传字节流并设置权限的代码示例，以及生成公共访问URL的方法。
 ---
 
 要想去掉阿里云oss链接中的签名信息，至少要将此object设置为public read，也就是这个链接是公开的任何人都可以读，而且没有时间限制。

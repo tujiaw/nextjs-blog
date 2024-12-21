@@ -3,7 +3,7 @@ title: '使用Python和Redis实现多台电脑剪切板内容同步'
 date: '2023-11-12'
 tags: ['Python']
 draft: false
-summary: 
+summary: 本文介绍了如何使用 Python 和 Redis 实现多台电脑之间的剪切板内容同步。通过创建 `ClipboardSync` 类，程序能够监听本地剪切板的变化，并将复制的内容发送到 Redis 服务器。其他运行相同程序的电脑可以从 Redis 接收并粘贴这些内容。项目依赖于 `pyperclip` 和 `redis-py` 库，利用多线程和 `asyncio` 事件循环确保实时同步。此工具简化了跨设备分享文本和链接的过程，提升了工作效率。
 ---
 
 简介：
