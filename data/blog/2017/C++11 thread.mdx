@@ -8,7 +8,10 @@ summary:
 
 windows系统中，需要vs2012才支持。
 # 线程的创建
-C++11线程类std::thread，头文件include <thread>  
+C++11线程类std::thread，头文件
+```
+include <thread>  
+```
 首先，看一个最简单的例子：
 ```
 void my_thread()  
@@ -272,7 +275,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 1. Foo类成员变量定义的顺序，mutex和cond必须在thread的前面。原因是：如果线程的定义在前面，线程初始化完成之后立马会执行线程函数，而线程函数里用到了mutex和cond，此时如果mutex和cond还没初始化完成，就会出现内存错误。
 
-2. 由于同时有两个线程需要操作flag变量，所以在读写的时候要加锁， std::unique_lock<std::mutex>会保证构造的时候加锁，离开作用域调用析构的时候解锁，所以不用担心加解锁不匹配。
+2. 由于同时有两个线程需要操作flag变量，所以在读写的时候要加锁， ```std::unique_lock<std::mutex>```会保证构造的时候加锁，离开作用域调用析构的时候解锁，所以不用担心加解锁不匹配。
 
 3. threadFunc1中的while (0 == flag_)， 必须这样写不能写成if (0 == flag_)，因为在多核CPU下会存在虚假唤醒（ spurious wakes）的情况。
 

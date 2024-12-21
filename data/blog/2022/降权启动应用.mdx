@@ -15,7 +15,7 @@ WTSQueryUserToken在普通会话下调用总是失败，但是在session 0上的
 Obtains the primary access token of the logged-on user specified by the session ID. To call this function successfully, the calling application must be running within the context of the LocalSystem account and have the SE_TCB_NAME privilege.
 
 Caution  WTSQueryUserToken is intended for highly trusted services. Service providers must use caution that they do not leak user tokens when calling this function. Service providers must close token handles after they have finished using them.
-
+```
 BOOL runProcessAsUser(const std::string& command, bool isShow)
 {
     HANDLE hToken = NULL;
@@ -58,5 +58,5 @@ BOOL runProcessAsUser(const std::string& command, bool isShow)
     return result;
 }
 
-
+```
 **此代码没有经过严谨的测试，仅供参考。**

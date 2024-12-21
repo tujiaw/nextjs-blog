@@ -60,10 +60,18 @@ Connection正常关闭（调用close）才能删除队列，否则不起作用�
 如果没有指定exchange会通过默认exchange（名字是空，类型是direct）来转发到队列，通过qpid-tool工具中的list exchange可以看到第一个就是默认的
 
 # type为queue（direct模式）
-点对点通信，一方发送一方接收，接收方不在时消息会保留在broker上。当sender的地址为ningto;{create:always, node:{type:queue}}时，qpid会创建一个名字为ningto的队列，同时receiver必须以相同的队列名才能收到消息且只一个receiver才能消费此消息。
+点对点通信，一方发送一方接收，接收方不在时消息会保留在broker上。当sender的地址为
+```
+ningto;{create:always, node:{type:queue}}
+```
+时，qpid会创建一个名字为ningto的队列，同时receiver必须以相同的队列名才能收到消息且只一个receiver才能消费此消息。
 
 # type为topic（topic模式）
-订阅模式，一方发送多方接收，接收方不在时直接丢弃。当sender的地址为ningtotopic;{create:always, node: {type: topic}}时，qpid会创建一个名字为ningtotopic的exchange。  
+订阅模式，一方发送多方接收，接收方不在时直接丢弃。当sender的地址为
+```
+ningtotopic;{create:always, node: {type: topic}}
+```
+时，qpid会创建一个名字为ningtotopic的exchange。  
 发送消息到此exchange：    
 1> 如果没有receiver消息将直接丢弃，这样不会造成消息堆积；  
 2> 如果有一个receiver的地址为ningtotopic，那么说明它订阅了这个topic，此时会在queue上创建一个已ningtotopic为起始字符串的临时队列（如下所示，它是自动删除的），exchange会将消息路由一份到这个队列；  

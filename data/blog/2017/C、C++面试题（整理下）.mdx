@@ -7,8 +7,11 @@ summary:
 ---
 
 # 如何打印出当前源文件的文件名以及源文件的当前行号
-答：cout << __FILE__;  
+答：
+```
+cout << __FILE__;  
 cout << __LINE__;  
+```
 __FILE__和__LINE__是系统预定义宏，这种宏并不是在某个文件中定义的，而是由编译器定义的。
 
 # main主函数执行完毕后，是否可能会再执行一段代码，给出说明
@@ -270,7 +273,7 @@ int StrlenEx(const char *src)
 # 头文件中的ifndef/define/endif的作用
 答：防止该头文件被重复引用。
 
-# #include <file.h>与#include "file.h"的区别
+# ```#include <file.h>```与```#include "file.h"```的区别
 答：前者是从Standard Library的路径寻找和引用file.h，而后者是从当前工作路径搜寻并引用file.h。
 
 # 在C++程序中调用被C编译器编译后的函数，为什么要加extern "C"

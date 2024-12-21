@@ -159,7 +159,7 @@ m_ctrl.SetExtendedListViewStyle(LVS_EX_FULLROWSELECT | LVS_EX_CHECKBOXES);
 VS2008：  
 工具(Tools)菜单 -- 导入导出设置(Import and Export Settings...) -- 重置所有选项(Reset all settings) -- 否，不保存设置(最后一个) -- 选择你的设置 比如Visual C# 开发设置(Visual C# Development Settings) -- 完成(Finish)
 24. 解决WTL中CString与ATL中CString的问题：  
-在#include <atlapp.h>的前面写下如下代码：
+在```#include <atlapp.h>```的前面写下如下代码：
 ```
 #define _WTL_NO_CSTRING
 #include <atlstr.h>
@@ -194,7 +194,7 @@ for (pos=m_mapDeviceItem.GetStartPosition(); pos1!=NULL; )
 }
 ```
 28. CList用法
-// 头文件#include <afxtempl.h>
+头文件```#include <afxtempl.h>```
 ```
 CList<CString, CString&> m_listDeviceItem;
 POSITION pos;
