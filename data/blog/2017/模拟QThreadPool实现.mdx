@@ -3,17 +3,18 @@ title: '模拟QThreadPool实现'
 date: '2017-09-21'
 tags: ['C/C++']
 draft: false
-summary: 
+summary: 本文介绍了使用C++模拟实现QThreadPool的过程，涵盖线程池的核心组件设计与实现，包括任务调度、线程管理及同步机制。
 ---
 
 ## std::thread::hardware_concurrency()  
 返回硬件线程上下文的数量，通常是CPU内核数量
 
-## template <class T> numeric_limits
+## ```template <class T> numeric_limits```
 根据当前平台，获取指定类型的信息
+```
 > std::numeric_limits<int>::min() 获取int最小值
 > std::numeric_limits<unsigned long>::max() 获取unsigned long最大值
-
+```
 ## std::unique_ptr
 管理一个指针对象，在出作用域后自动销毁对象，而且它更安全不允许直接通过赋值来修改它
 
@@ -25,7 +26,7 @@ std::upper_bound (v.begin(), v.end(), 20)
 std::lower_bound(v.begin(), v.end(), 20)  
 返回第一个等于20的迭代器，没找到返回v.end()
 
-## std::unique_lock<std::mutex>
+## ```std::unique_lock<std::mutex>```
 构造的时候加锁，析构的时候解锁，保证加解锁是成对的不会漏掉
 
 

@@ -1,5 +1,5 @@
 ---
-title: '如何在Ubuntu 14.04上使用Corosync，Pacemaker和浮动IP构建高可用服务'
+title: '如何在Ubuntu 14.04上使用Corosync Pacemaker和浮动IP构建高可用服务'
 date: '2020-06-03'
 tags: ['Linux']
 draft: false
@@ -195,7 +195,7 @@ Corosync在端口`5404`和之间使用UDP传输`5406`。如果您正在运行防
 `corosync.conf`使用此配置以及特定于您的环境的更改来替换的内容：
 
 /etc/corosync/corosync.conf
-
+```
     totem {
       version: 2
       cluster_name: lbcluster
@@ -233,7 +233,7 @@ Corosync在端口`5404`和之间使用UDP传输`5406`。如果您正在运行防
       timestamp: on
     }
     
-
+```
 的**图腾**部分（线1-11），这指的是Corosync用来群集成员的图腾协议，规定了如何群集成员应该彼此通信。在我们的设置中，重要的设置包括`transport: udpu`（指定单播模式）和`bindnetaddr`（指定Corosync应该绑定到哪个网络地址）。
 
 所述**仲裁**部（线13-16）指定这是一个双节点群集，因此只有一个单一的节点需要仲裁（`two_node: 1`）。这是以下事实的一种变通方法：要达到法定人数，群集中至少需要三个节点。此设置将使我们的两节点群集可以选择一个协调器（DC），该节点是在任何给定时间控制群集的节点。
@@ -247,31 +247,31 @@ Corosync在端口`5404`和之间使用UDP传输`5406`。如果您正在运行防
 接下来，我们需要配置Corosync以允许Pacemaker服务。
 
 在**两台服务器上**，`pcmk`使用编辑器在Corosync服务目录中创建文件。我们将使用`vi`：
-
+```
     sudo vi /etc/corosync/service.d/pcmk
-    
+ ```   
 
 然后添加Pacemaker服务：
-
+```
     service {
       name: pacemaker
       ver: 1
     }
     
-
+```
 保存并退出。这将包含在Corosync配置中，并允许Pacemaker使用Corosync与我们的服务器进行通信。
 
 默认情况下，Corosync服务被禁用。在**两台服务器上**，通过编辑来更改它`/etc/default/corosync`：
-
+```
     sudo vi /etc/default/corosync
-    
+ ```   
 
 将值更改`START`为`yes`：
-
+```
 / etc / default / corosync
 
     START=yes
-    
+ ```   
 
 保存并退出。现在，我们可以启动Corosync服务。
 
