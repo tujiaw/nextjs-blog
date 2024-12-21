@@ -19,7 +19,10 @@ Shape *sp = new Circle;//子类转换为父类不需要说明
 Circle *cp = static_cast<Circle *>(sp);//父类转换为子类要进行显示说明
 ```
 > 可以这样说：圆是形状中的一种， 但是形状不一定就是圆的。 
-注意：如果sp是Shape的其他派生实例，进行Circle *cp = static_cast<Circle *>(sp)转换时就会报错，如果用旧的强制类型转换Circle *cp = (Circle*)sp，编译器就不会发现这个错误了，所以应该用static_cast进行转换。
+注意：如果sp是Shape的其他派生实例，进行
+```Circle *cp = static_cast<Circle *>(sp)
+```
+转换时就会报错，如果用旧的强制类型转换Circle *cp = (Circle*)sp，编译器就不会发现这个错误了，所以应该用static_cast进行转换。
 * reinterpret_cast  
 > reinterpret_caset一般用于指针之间的转换。 
 对于字节数相同的类型，例如整形和指针型，可以实现完全的按位转换。这意味着你可以把一个整数赋给一个指针，也可以把一个指针转换成整数，也可以实现各种不兼容指针的转换。  

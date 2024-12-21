@@ -12,7 +12,7 @@ summary:
 在创建的时候Select project options下要勾选Enable ActiveX Control Hosting， 让其继承自CAxDialogImpl， 然后在对话框上点右键Insert ActiveX Control...， 找到Microsoft Web Browser确定， 将属性ID号改为IDC_IE。
 
 ## 让程序运行后打开一个默认网页
-* CComPtr<IWebBrowser2> m_pWb2;
+* ```CComPtr<IWebBrowser2> m_pWb2;```
 * 在OnInitDialog中， return上面
 ```
 CAxWindow wndIE = GetDlgItem(IDC_IE);
@@ -26,7 +26,7 @@ if (m_pWb2)
 ```
 
 ## 解决在同一个窗口打开网页的问题
-* 让CMainDlg继承自public IDispEventImpl<IDC_IE, CMainDlg>
+* 让CMainDlg继承自```public IDispEventImpl<IDC_IE, CMainDlg>```
 给控件添加一个事件，这个事件是在打开一个新窗口的时候触发
 ```
 BEGIN_SINK_MAP(CMainDlg)
@@ -67,7 +67,7 @@ void __stdcall NewWindow2Ie(IDispatch **ppDisp, VARIANT_BOOL* Cancel)
 ```
 
 具体函数的作用可以查下msdn， 按理说这样应该就完了， 但是当我编译的时候有个错误说DISPID_NEWWINDOW2没定义
-包含#include <ExDispid.h>就可以了。
+包含```#include <ExDispid.h>```就可以了。
 问题还没完， 运行后点击网页上的链接窗口并没有响应上面的事件，解决方法：
 ```
 BEGIN_MSG_MAP(CMainDlg)
