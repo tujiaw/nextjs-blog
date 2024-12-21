@@ -99,11 +99,14 @@ nginx.conf 配置文件如下： **_注：conf / nginx.conf 是 nginx 的默认�
     pid        D:/Tools/nginx-1.10.1/logs/nginx.pid;
     
     #工作模式及连接数上限
+    ```
     events {
-        worker_connections 1024;    #单个后台worker process进程的最大并发链接数
+        # 单个后台worker process进程的最大并发链接数
+        worker_connections 1024;
     }
-    
+    ```
     #设定http服务器，利用它的反向代理功能提供负载均衡支持
+    ```
     http {
         #设定mime类型(邮件支持类型),类型由mime.types文件定义
         include       D:/Tools/nginx-1.10.1/conf/mime.types;
@@ -191,7 +194,7 @@ nginx.conf 配置文件如下： **_注：conf / nginx.conf 是 nginx 的默认�
             #}
         }
     }
-
+```
 好了，让我们来试试吧：
 
 1.  启动 webapp，注意启动绑定的端口要和 nginx 中的 `upstream` 设置的端口保持一致。
@@ -213,7 +216,7 @@ nginx 也可以实现简单的负载均衡功能。
 假设这样一个应用场景：将应用部署在 192.168.1.11:80、192.168.1.12:80、192.168.1.13:80 三台 linux 环境的服务器上。网站域名叫 [www.helloworld.com，公网](https://link.zhihu.com/?target=http%3A//www.helloworld.xn--com%252C-tt8fy44v/) IP 为 192.168.1.11。在公网 IP 所在的服务器上部署 nginx，对所有请求做负载均衡处理。
 
 nginx.conf 配置如下：
-
+```
     http {
          #设定mime类型,类型由mime.type文件定义
         include       /etc/nginx/mime.types;
@@ -262,7 +265,7 @@ nginx.conf 配置如下：
             }
         }
     }
-
+```
 ### 网站有多个 webapp 的配置
 
 当一个网站功能越来越丰富时，往往需要将一些功能相对独立的模块剥离出来，独立维护。这样的话，通常，会有多个 webapp。
@@ -280,7 +283,7 @@ nginx.conf 配置如下：
 那么，问题来了，用户在实际访问 [www.helloworld.com](https://link.zhihu.com/?target=http%3A//www.helloworld.com/) 站点时，访问不同 webapp，总不会还带着对应的端口号去访问吧。所以，你再次需要用到反向代理来做处理。
 
 配置也不难，来看看怎么做吧：
-
+```
     http {
     	#此处省略一些基本配置
     
@@ -316,7 +319,7 @@ nginx.conf 配置如下：
     		}
     	}
     }
-
+```
 ### https 反向代理配置
 
 一些对安全性要求比较高的站点，可能会使用 HTTPS（一种使用 ssl 通信标准的安全 HTTP 协议）。
@@ -327,7 +330,7 @@ nginx.conf 配置如下：
 *   SSL 标准需要引入安全证书，所以在 nginx.conf 中你需要指定证书和它对应的 key
 
 其他和 http 反向代理基本一样，只是在 `Server` 部分配置有些不同。
-
+```
     #HTTP服务器
       server {
           #监听443端口。443为知名端口号，主要用于HTTPS协议
@@ -353,7 +356,7 @@ nginx.conf 配置如下：
               index  index.html index.htm;
           }
       }
-
+```
 ### 静态站点配置
 
 有时候，我们需要配置静态站点(即 html 文件和一堆静态资源)。
@@ -361,7 +364,7 @@ nginx.conf 配置如下：
 举例来说：如果所有的静态资源都放在了 `/app/dist` 目录下，我们只需要在 `nginx.conf` 中指定首页以及这个站点的 host 即可。
 
 配置如下：
-
+```
     worker_processes  1;
     
     events {
@@ -389,7 +392,7 @@ nginx.conf 配置如下：
     		}
     	}
     }
-
+```
 然后，添加 HOST：
 
 127.0.0.1 [http://static.zp.cn](https://link.zhihu.com/?target=http%3A//static.zp.cn)
@@ -409,7 +412,7 @@ Nginx 中的配置要点：
 *   charset 设置为 `charset utf-8,gbk;`，可以避免中文乱码问题（windows 服务器下设置后，依然乱码，本人暂时没有找到解决方法）。
 
 一个最简化的配置如下：
-
+```
     autoindex on;# 显示目录
     autoindex_exact_size on;# 显示文件大小
     autoindex_localtime on;# 显示文件时间
@@ -421,7 +424,7 @@ Nginx 中的配置要点：
         server_name  _;
         root         /share/fs;
     }
-
+```
 ### 跨域解决方案
 
 web 领域开发中，经常采用前后端分离模式。这种模式下，前端和后端分别是独立的 web 应用程序，例如：后端是 Java 程序，前端是 React 或 Vue 应用。
@@ -445,7 +448,7 @@ web 领域开发中，经常采用前后端分离模式。这种模式下，前�
 前端和后端如果使用 http 进行交互时，请求会被拒绝，因为存在跨域问题。来看看，nginx 是怎么解决的吧：
 
 首先，在 enable-cors.conf 文件中设置 cors ：
-
+```
     # allow origin list
     set $ACAO '*';
     
@@ -472,9 +475,9 @@ web 领域开发中，经常采用前后端分离模式。这种模式下，前�
     if ($request_method = 'POST') {
       set $cors "${cors}post";
     }
-
+```
 接下来，在你的服务器中 `include enable-cors.conf` 来引入跨域配置：
-
+```
     # ----------------------------------------------------
     # 此文件为项目 nginx 配置片段
     # 可以直接在 nginx config 中 include（推荐）
@@ -503,7 +506,7 @@ web 领域开发中，经常采用前后端分离模式。这种模式下，前�
         proxy_pass http://front_server;
       }
     }
-
+```
 到此，就完成了。
 
 

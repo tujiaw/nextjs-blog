@@ -258,11 +258,11 @@ Leaf Page与Index Page拆分
     
 
 老版本的MySQL会随机选择一个索引，但新版本做如下的优化：
-
+```
     select film_id,actor_id from film_actor where actor_id = 1  
     union all 
     select film_id,actor_id from film_actor where film_id = 1 and actor_id <> 1
-    
+```  
 
 *   当出现多个索引做相交操作时（多个AND条件），通常来说一个包含所有相关列的索引要优于多个独立索引。
 *   当出现多个索引做联合操作时（多个OR条件），对结果集的合并、排序等操作需要耗费大量的CPU和内存资源，特别是当其中的某些索引的选择性不高，需要返回合并大量数据时，查询成本更高。所以这种情况下还不如走全表扫描。
@@ -363,7 +363,7 @@ MySQL有两种方式可以生产有序的结果集，其一是对结果集进行
     
 
 假设MySQL按照查询中的关联顺序A、B来进行关联操作，那么可以用下面的伪代码表示MySQL如何完成这个查询：
-
+```
     outer_iterator = SELECT A.xx,A.c FROM A WHERE A.xx IN (5,6);
     outer_row = outer_iterator.next;
     while(outer_row) {
@@ -375,7 +375,7 @@ MySQL有两种方式可以生产有序的结果集，其一是对结果集进行
         }
         outer_row = outer_iterator.next;
     }
-    
+```    
 
 可以看到，最外层的查询是根据`A.xx`列来查询的，`A.c`上如果有索引的话，整个关联查询也不会使用。再看内层的查询，很明显`B.c`上如果有索引的话，能够加速查询，因此只需要在关联顺序中的第二张表的相应列上创建索引即可。
 

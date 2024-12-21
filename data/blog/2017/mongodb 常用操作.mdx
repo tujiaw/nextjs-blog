@@ -14,50 +14,63 @@ mongo --host 123.57.244.111 --port 27017
 
 ## 插入数据
 插入一条数据：  
+```
 db.test.insert({title: "1111111111111111111"})  
-
+```
 循环插入数据：  
+```
 for (var i = 0; i < 100; i++) {  
   db.test.insert({title: i * 1000})  
 }  
-
-插入数组：  
+```
+插入数组： 
+``` 
 db.test.insert([{title: "aaaaaaaaaaaaa"}, {title: "bbbbbbbbbbbb"}]) 
-
+```
 ## 聚合
 插入一个0到100的随机年龄
+```
 for (var i = 0; i < 100; i++) {
   db.test.insert({age: Math.round(Math.random() * 100)});
 }
-
+```
 统计同一个年龄出现的次数
+```
 db.test.aggregate([{$group: {_id: "$age", count: {$sum: 1}}}])
-
+```
 ## 查询
 查询所有数据  
+```
 db.test.find()  
-
+```
 查询大于90000的  
+```
 db.test.find({title: {$gt: 90000}})  
-
+```
 查询大于90000小于93000  
+```
 db.test.find({title: {$gt: 90000, $lt: 93000}})  
-
+```
 查询一条数据  
+```
 db.test.findOne()  
-
+```
 查询存在字段name的  
+```
 db.test.find({name: {$exists: true}})  
-
-查询所有文章阅读数大于100的标题    
+```
+查询所有文章阅读数大于100的标题   
+``` 
 db.posts.find({pv: {$gt: 100}}, {title: 1}).pretty()  
-
+```
 查询所有文章阅读数大于100的总数  
+```
 db.posts.count({pv: {$gt: 100}})  
-
+```
 查询所有文章阅读数大于100，标题包含mongo的文章  
+```
 db.posts.find({pv: {$gt: 100}, title:/mongo/}).pretty()  
-
+```
 查询操作符  
 $eq:等于  
 $gt:大于  
@@ -73,36 +86,44 @@ $type:检索集合中匹配的数据类型
 
 ## 删除记录
 删除title大于等于2000的  
+```
 db.test.remove({title: {$gte: 2000}})  
-
+```
 删除所有记录  
+```
 db.test.remove({})  
-
+```
 ## limit方法
 该参数指定从MongoDB中读取的记录条数  
 
 读取两条记录  
+```
 db.test.find().limit(2)  
-
+```
 ## skip方法
 跳过指定数量的数据  
 
 读取第三条数据  
+```
 db.test.find().skip(2)
-
+```
 ## sort方法
 对数据进行排序，可以通过参数指定排序的字段，并使用1和-1来指定排序的方式，其中1为升序排列，而-1是用于降序排列
 。  
 
 根据title升序排序  
+```
 db.test.find().sort({title: 1})  
-
+```
 ## distinct方法
 返回指定字段的非重复值组成的数组  
+```
 db.test.distinct("title")  
-
+```
 ## 查询创建的索引
+```
 db.test.getIndexes()
+```
 结果：
 ```
 [
@@ -127,23 +148,32 @@ db.test.getIndexes()
 ```
 
 ## 删除索引，通过上面查到的name，如：title_1_count_1
+```
 db.test.dropIndex("title_1_count_1")
-
+```
 ## 创建索引
+```
 db.test.createIndex({title: 1})  
+```
 1：升序， -1：降序  
 
-创建联合索引：db.test.createIndex({title: 1, count: 1})  
+创建联合索引：
+```
+db.test.createIndex({title: 1, count: 1})  
+```
 
 ## 查看命令执行时间
 在命令后面增加：explain("executionStats")  
+```
 如：db.test.find({title: "hello99999"}).explain("executionStats")  
+```
 结果中的executionTimeMillis就是花费的时间  
 
 ## 删除文档
 如：删除所有count大于10的文档  
+```
 db.test.remove({count: {$gt: 10}})
-
+```
 ## 主从复制
 下面两个路径必须先创建  
 1>开启主服务：mongod --master --dbpath e://MongoDB/data/master --port 8888  

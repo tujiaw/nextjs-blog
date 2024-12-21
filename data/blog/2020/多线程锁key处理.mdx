@@ -10,7 +10,7 @@ summary:
 
 1. 收到网络过来的消息，将消息缓存到total msg cache里
 2. 解析业务消息找到每条数据的key（可能一条或多条）存储在set中
-3. 将所有key进行hash，对最大线程数进行取余，获取所有线程索引std::set<int> indexList
+3. 将所有key进行hash，对最大线程数进行取余，获取所有线程索引```std::set<int> indexList```
 4. 如果消息没有index即没有key，就轮询分发给otherThread处理
 5. 有index的消息，根据index分发给线程，如果一个消息有多个index，对应的一个消息会分发给多个线程（keyThread）
 6. 每个keyThread不断的从线程队列里取出消息ID来处理（线程队列只保留消息ID）

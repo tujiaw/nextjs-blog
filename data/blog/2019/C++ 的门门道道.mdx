@@ -78,7 +78,14 @@ vector是动态扩容的，2的次方往上翻，为了确保数据保存在连�
 
 运行过程中需要动态增删的vector，不宜存放大的对象本身 ，因为扩容会导致所有成员拷贝构造，消耗较大，可以通过保存对象指针替代。
 
-resize()是重置大小；reserve()是预留空间，并未改变size()，可避免多次扩容； clear()并不会导致空间收缩 ，如果需要释放空间，可以跟空的vector交换，std::vector <t>.swap(v)，c++11里shrink\_to\_fit()也能收缩内存。
+resize()是重置大小；reserve()是预留空间，并未改变size()，可避免多次扩容； clear()并不会导致空间收缩 ，如果需要释放空间，可以跟空的vector交换，
+```
+std::vector <t>.swap(v)
+```
+c++11里
+```
+shrink_to_fit()
+```也能收缩内存。
 
 理解at()和operator\[\]的区别 ：at()会做下标越界检查，operator\[\]提供数组索引级的访问，在release版本下不会检查下标，VC会在Debug版本会检查；c++标准规定:operator\[\]不提供下标安全性检查。
 
@@ -112,7 +119,7 @@ memcpy，memset有很强的限制，仅能用于POD结构，不能作用于stl�
 
 **十一、stl容器的遍历删除要小心迭代器失效，vector、list、map、set等各有不同的写法**
 ```
-    #include <vector>
+   #include <vector>
    #include <map>
    #include <iterator>
    #include <iostream>
@@ -120,8 +127,9 @@ memcpy，memset有很强的限制，仅能用于POD结构，不能作用于stl�
 
    int main(int argc, char * argv[]) {
      //vector遍历删除    
-     std::vector < int > v(8);
-     std::generate(v.begin(), v.end(), std::rand);::cout << "after vector generate...\n";
+     std::vector<int> v(8);
+     std::generate(v.begin(), v.end(), std::rand);
+     std::cout << "after vector generate...\n";
      std::copy(v.begin(), v.end(), std::ostream_iterator < int > (std::cout, "\n"));
      for (auto x = v.begin(); x != v.end();) {
        if ( * x % 2) x = v.erase(x);
@@ -143,6 +151,7 @@ memcpy，memset有很强的限制，仅能用于POD结构，不能作用于stl�
      return 0;
    }
 ```
+
 有时候遍历删除的逻辑不是这么明显，可能循环里调了另一个函数，而该函数在某种特定的情况下才会删除当前元素，这样的话，就是很长一段时间，程序都运行得好好的，而当你正跟别人谈笑风生的时候，忽然crash，这就尴尬了。
 
 圣斗士星矢项目曾经遭遇过这个问题，基本规律是一个礼拜game server crash一次，折磨团队将近一个月。
