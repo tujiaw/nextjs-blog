@@ -1,7 +1,7 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Next.js Starter Blog',
-  author: 'Tails Azimuth',
+  title: "Ningto's Blog",
+  author: 'ningto.com',
   headerTitle: "Ningto's Blog",
   description: 'Welcome to my blog! Stay Hungry, Stay Foolish.',
   language: 'en-us',
