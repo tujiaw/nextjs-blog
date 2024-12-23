@@ -3,7 +3,7 @@ title: 'QWidget QLabel没有响应keyEvent键盘事件'
 date: '2020-06-23'
 tags: ['Qt']
 draft: false
-summary: 
+summary: 在 Qt 中，常通过重写虚函数实现按键事件。但 QWidget、QLabel 有时无法触发，可能被父窗口截获或无焦点。可通过鼠标点击和 tab 键获取焦点，像它们即使鼠标点上也无焦点，需设置焦点获取策略如 setFocusPolicy(Qt::StrongFocus)，获取焦点才能响应按键事件。 
 ---
 
 在Qt中我们经常通过重写下面两种虚函数来实现按键事件

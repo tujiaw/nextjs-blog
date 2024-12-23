@@ -3,7 +3,7 @@ title: 'qDebug日志写入本地文件'
 date: '2017-06-30'
 tags: ['C/C++', 'Qt']
 draft: false
-summary: 
+summary: 在 Qt 中，通过`qInstallMessageHandler(myMessageOutput)`在应用创建前设置日志处理函数。该函数根据不同类型输出带时间、文件、行号的日志，使用当天日期作为文件名，可指定打印文件，日志信息先输出到调试面板再写入文件。 
 ---
 
 在Qt中使用qDebug打印日志信息是非常方便的，它可以直接打印Qt提供的复杂数据结构，如:QStringList,QVariantMap等。不做处理的话它只能在编辑器中打印调试信息，下面介绍将日志信息写入文件的实现方法。

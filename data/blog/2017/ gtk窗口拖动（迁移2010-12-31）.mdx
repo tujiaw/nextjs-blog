@@ -3,7 +3,7 @@ title: 'gtk窗口拖动（迁移2010-12-31）'
 date: '2017-01-15'
 tags: ['Linux']
 draft: false
-summary: 
+summary: 文章介绍 gtk 窗口拖动相关内容。先加入事件，关联信号与 button 按下事件，实现窗口拖动。还能使窗口不能移出桌面最左边并在标题栏显示位置坐标，通过关联信号与事件及相应实现函数来完成。 
 ---
 
 1. 加入事件    gtkwidgetaddevents(window, GDKBUTTONPRESSMASK);    2. 关联信号与button按下的事件    gsignalconnect(GOBJECT(window), "button-press-event", GCALLBACK(windowdrag), NULL);    3. 窗口拖动事件的...

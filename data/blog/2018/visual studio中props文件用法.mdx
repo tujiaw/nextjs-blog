@@ -3,7 +3,7 @@ title: 'visual studio中props文件用法'
 date: '2018-06-29'
 tags: ['Windows']
 draft: false
-summary: 
+summary: 在 visual studio 中，.props 文件可固定工程配置，方便下次使用。其内容包含库目录宏定义等，导入到 vcxproj 文件只需在后者中用<Import Project="$(SolutionDir)asio.props"/>等语句。 
 ---
 
 使用visual studio IDE经常要进行一些工程属性的配置，通常是引入第三方库。如果库比较多的话每次建新工程都要配置一下比较麻烦，.props文件可以帮助我们把一些固定的配置写好，下次使用的时候直接import到vcxproj文件中就可以了。.props中的配置相当于vcxproj配置中的一部分，一般是共有部分才提出来。

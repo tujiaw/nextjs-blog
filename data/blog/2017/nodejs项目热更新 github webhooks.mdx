@@ -3,7 +3,7 @@ title: 'nodejs项目热更新 github webhooks'
 date: '2017-02-07'
 tags: ['Node.js']
 draft: false
-summary: 
+summary: 介绍 nodejs 项目热更新 github webhooks，本地代码 git 上传后服务器接收通知并拉取代码重启程序。文中详述在 github 中设置及 nodejs 服务代码、脚本代码，需注意相关配置一致且安装相关组件。 
 ---
 
 当本地有代码通过git上传后，服务器收到github代码变更的通知，然后调用脚本拉取(git pull)最新的代码，最后重启程序(如：pm2 restart myproject)。所以只要通过git push完成后部署的程序就会自动热更新。

@@ -3,7 +3,7 @@ title: 'QTableView多选'
 date: '2018-01-09'
 tags: ['C/C++', 'Qt']
 draft: false
-summary: 
+summary: 介绍了 QTableView 多选，需了解 setSelectionBehavior 和 setSelectionMode 接口。初始化后用特定代码达不到要求，需使用 select 接口的新用法，封装了 selectMulRows 方法实现多选。 
 ---
 
 首先要了解它的setSelectionBehavior和setSelectionMode这两个接口，接下来再来考虑选中的问题。查看官方文档，setSelectionBehavior用来设置选中的是单元格，行还是列，setSelectionMode用来设置用户点击后的界面响应：单选，多选，扩展选择（Ctrl+Shift键），相邻，不选中。这里仅介绍设置为ExtendedSelection mode后的多选问题。

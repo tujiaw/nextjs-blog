@@ -3,7 +3,7 @@ title: 'Qt只启动一个实例'
 date: '2017-09-18'
 tags: ['C/C++', 'Qt']
 draft: false
-summary: 
+summary: 文章介绍 Qt 实现只启动一个实例的方法，涉及进程间通信。给出三种方案，重点展示共享内存的实现代码，通过 QSharedMemory 和 QSystemSemaphore 保证原子操作，用法示例中用随机 GUID 作为标识。 
 ---
 
 要想实现这个需求，就涉及到进程间通信了，怎样让当前启动的程序知道在它之前有没有程序在运行。

@@ -3,7 +3,7 @@ title: 'QLabel文本超出显示区域显示...'
 date: '2017-06-13'
 tags: ['C/C++', 'Qt']
 draft: false
-summary: 
+summary: 介绍了能让 QLabel 文本超出显示区域显示为“...”并带 tooltip 的 ElidedLabel 类。通过 paintEvent 处理文本绘制，超出则截断显示，且更新 elided 状态和 tooltip，代码包含类定义及实现。 
 ---
 
 这个功能很有用，默认情况下文本超出长度会被直接截断的，给用户体验很不好。这里截断后会显示...，并且鼠标划上去有tooltip。

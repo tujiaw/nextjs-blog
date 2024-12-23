@@ -3,7 +3,7 @@ title: '降权启动应用'
 date: '2022-04-02'
 tags: ['Windows']
 draft: false
-summary: 
+summary: 介绍了在 Windows 中降权启动应用的方法，指出 WTSQueryUserToken 在普通会话下调用常失败但在 session 0 服务中可成功，给出代码`runProcessAsUser`，但强调此代码未严谨测试仅供参考。 
 ---
 
 如果应用是管理员权限，它再去启其他进程时也会是管理员权限，那么怎样降权呢？让它以普通用户的权限来启动，下面代码提供了一种实现方法。

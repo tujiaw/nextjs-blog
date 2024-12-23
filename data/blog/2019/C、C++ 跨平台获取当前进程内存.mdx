@@ -3,7 +3,7 @@ title: 'C、C++ 跨平台获取当前进程内存'
 date: '2019-01-17'
 tags: ['C/C++']
 draft: false
-summary: 
+summary: 文章介绍跨平台获取当前进程内存，“Resident set size”很重要。提供了获取进程峰值和当前驻留集大小的函数，在不同操作系统（如 Windows、Linux 等）有不同实现方式，给出了相应源码。 
 ---
 
 The "Resident set size" ("Working set size" on Windows) is the amount of physical memory (RAM) used by a process's code and data. Monitoring size changes is an important way to find memory leaks and improve performance, but methods to get this data differ between Windows, Linux, OSX, BSD, Solaris, and others. This article provides cross-platform functions to get the peak (maximum) and current resident set size of a process, and explains what works on what OS.

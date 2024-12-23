@@ -3,7 +3,7 @@ title: '给mongodb服务增加认证'
 date: '2020-04-19'
 tags: ['MongoDB']
 draft: false
-summary: 
+summary: 文章介绍给 mongodb 服务增加认证的方法。先将数据库配置为 noauth:true 启动，创建用户并设置权限，再改为 auth:true 启动，客户端连接可通过 go 语言 mgo 框架或 Studio 3T 工具，需设置用户名、密码和认证数据库。 
 ---
 
 在连接mongodb的时候增加用户名和密码认证，如你需要访问nodeblog库进行认证。

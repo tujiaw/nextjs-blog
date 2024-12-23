@@ -3,7 +3,7 @@ title: 'QTableWidget整行高亮去虚线，样式定制'
 date: '2020-10-15'
 tags: ['Qt']
 draft: false
-summary: 
+summary: 文章介绍了 QTableWidget 整行高亮去虚线及样式定制方法。定义接口类存储 hovered 行和 split 行，表格绘制代理类实现 item 定制绘制，包括去掉焦点虚线框、hover 整行高亮等。table 具体应用结合两部分实现需求，通过 mouseMoveEvent 设 hovered 行，此分层方式灵活且易扩充功能。 
 ---
 
 很常见的一种需求，但是很可惜Qt没有一种比较简单的实现方式。在网上找了很多资料也没有找到，实现方法比较复杂，但是经过

@@ -3,7 +3,7 @@ title: 'golang与qpid broker通信'
 date: '2020-04-29'
 tags: ['Go']
 draft: false
-summary: 
+summary: 文章介绍 golang 与 qpid broker 通信，使用 github.com/Azure/go-amqp 库，演示 sender 和 receiver 简单例子，还包括请求应答示例，通过 New 函数创建 handler 处理发送和接收消息，最后展示发送消息并处理应答的代码。 
 ---
 
 这里我用的是github.com/Azure/go-amqp这个库，它支持AMQP 1.0协议，是纯go语言实现的。qpid用的是1.39.0版本直接启动的话它是不支持AMQP 1.0协议的，需要加载amqp.so库（[加载方法](https://www.ningto.com/post/5ea109bb707b535469eb754c)）。  

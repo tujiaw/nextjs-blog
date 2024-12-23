@@ -3,7 +3,7 @@ title: '给marked增加TOC(Table of content)'
 date: '2017-10-22'
 tags: ['Web', 'Javascript']
 draft: false
-summary: 
+summary: 介绍给 marked 库增加 TOC 功能，先初始化 marked 引入库并重写 renderer.heading，设置参数后保存解析后的 header 信息，再用特定代码将数据转换成 html 形式的 toc，最后通过 post2html 函数实现并添加锚点定位偏移 css。 
 ---
 
 一直使用marked库解析Markdown，现在想给它增加TOC功能  

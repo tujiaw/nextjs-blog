@@ -3,7 +3,7 @@ title: 'react native中使用protobufjs'
 date: '2018-02-25'
 tags: ['React', 'Javascript']
 draft: false
-summary: 
+summary: 文章介绍 react native 中使用 protobufjs，需将 proto 文件转换为 json 载入，注意 lookupTypeOrEnum 查找 message 时 proto 中 enum 枚举类型会失败，还提到在不同系统降级 protobuf.js 版本的情况及相关代码片段。 
 ---
 
 javascript使用protobuf google官方已经支持了可以看[这里](https://github.com/google/protobuf/tree/master/js)，我只是简单的试用了下没有深究，这篇文章介绍的是dcodeIOde的[protobuf.js](https://github.com/dcodeIO/protobuf.js)库，web端使用还是蛮方便的，但在react native中遇到了一些坑。

@@ -3,7 +3,7 @@ title: 'WebBrowser控件判断页面加载完毕'
 date: '2017-04-15'
 tags: ['Windows']
 draft: false
-summary: 
+summary: 文章介绍 WebBrowser 控件判断页面加载完毕的方法。DWebBrowserEvents2 Members 的 DocumentComplete 成员可用于此，但直接处理不行，需做处理。给出具体代码示例，在特定条件下进行页面加载完成的处理。 
 ---
 
 大家都知道DWebBrowserEvents2 Members的DocumentComplete（Fires when a document is completely loaded and initialized)成员的作用。但是实际上直接在它里面处理加载完成后的事件是不行的， 我们还需要做一些处理才行。直接看代码：

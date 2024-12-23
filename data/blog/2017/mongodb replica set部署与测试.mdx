@@ -3,7 +3,7 @@ title: 'mongodb replica set部署与测试'
 date: '2017-12-03'
 tags: ['Database', 'MongoDB']
 draft: false
-summary: 
+summary: 在 windows 一台机器上部署 3 个端口不同的副本集，先创建并初始化，再新增成员。通过 nodejs 测试，关闭主服务后写入数据会失败十几秒后自动补上，至少两个成员存活才能完成自动切换到 primary，副本集个数需满足“大多数”概念，奇数个至少 3 个，偶数个需部署仲裁者。 
 ---
 
 # 环境

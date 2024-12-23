@@ -3,7 +3,7 @@ title: '解决ssh登录远程服务器慢的问题'
 date: '2020-05-12'
 tags: ['Linux']
 draft: false
-summary: 
+summary: 2020 年 5 月 12 日，ssh 登录远程服务器慢，改配置重启 sshd 无效，经调试发现卡在 pledge: network，原因是/var/log/btmp 文件过大，清除该文件可解决，还可找出登录失败用户及禁用指定 IP 并重载防火墙。 
 ---
 
 使用ssh远程登录大概需要两分钟才能登上去。

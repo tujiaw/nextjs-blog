@@ -3,7 +3,7 @@ title: 'QWebEngineView支持XP'
 date: '2017-04-25'
 tags: ['Qt']
 draft: false
-summary: 
+summary: Qt 应用中 QWebEngineView 在 XP 上有问题，网页内容显示不出且 QtWebEngineProcess.exe 起不来。需下载 5.6.2 版本 Qt 源码编译该文件，用 vs2013 打开相应 project 并设置属性，编译后替换 Qt 自带的可在 XP 上运行。 
 ---
 
 Qt应用程序中如果用到了QWebEngineView组件，在XP上是有问题的。现象是网页内容显示不出来，直接运行QtWebEngineProcess.exe发现是起不来的，解决办法是下载Qt源码自己编译这个文件。

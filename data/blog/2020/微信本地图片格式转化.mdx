@@ -3,7 +3,7 @@ title: '微信本地图片格式转化'
 date: '2020-11-21'
 tags: ['Go']
 draft: false
-summary: 
+summary: PC 端微信本地图片为.dat 格式且经简单加密，可通过特定 golang 算法还原成 jpg、gif、png 格式。先读文件判断前两字符，找到对应异或值 v 后对文件字符异或还原，有 github 源码可下载转换程序。 
 ---
 
 PC端微信收到的图片存储在本地，我们可以打开微信的设置->通用设置->文件管理->打开文件夹，在FileStorage/Image日期目录下找到图片文件，但是它经过了简单的加密并且后缀为.dat。

@@ -3,7 +3,7 @@ title: 'node.js中exports与module.exports区别'
 date: '2017-12-10'
 tags: ['Javascript']
 draft: false
-summary: 
+summary: 文章介绍 node.js 中 exports 与 module.exports 的区别。两种导出方式不同，给 exports 增加成员时两者一样，将对象赋值给 exports 时只有 module.exports 正确。原理是主调函数传参包装，exports 对 module.exports 是引用，混着用易出错，一般导出对象用 module.exports，其他用 exports。 
 ---
 
 我们知道exports是对module.exports的引用，那么使用的过程中有什么区别呢？

@@ -3,7 +3,7 @@ title: 'ERROR  child process failed, exited with error number 62'
 date: '2020-04-19'
 tags: ['MongoDB']
 draft: false
-summary: 
+summary: 2020 年 4 月 19 日，做数据库恢复后重启 mongodb 出现“ERROR: child process failed, exited with error number 62”错误，解决方法是删除 dbpath 所在目录（如 db 目录）并重新创建，若 db 目录不存在会报“ERROR: child process failed, exited with error number 100”错误。 
 ---
 
 今天做了数据库恢复动作，然后重启mongodb的时候出现如下错误：

@@ -3,7 +3,7 @@ title: 'golang 控制goroutine调度顺序'
 date: '2020-07-29'
 tags: ['Go']
 draft: false
-summary: 
+summary: 文章介绍 golang 控制 goroutine 调度顺序，用 go 启动 goroutine 执行顺序不保证，通过 event 包中的 Event 结构及相关函数可按需求调度。如多个 goroutine 按特定顺序执行及 a、b、c、d 倒序执行的代码示例等。 
 ---
 
 使用go关键字就可以很容易的启动一个goroutine，启动后他们的执行顺序是不能保证的。如果有多个goroutine，怎样按照我想要的顺序来执行呢？

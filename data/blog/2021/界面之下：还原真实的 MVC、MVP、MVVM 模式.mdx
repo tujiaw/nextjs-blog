@@ -3,7 +3,7 @@ title: '界面之下：还原真实的 MVC、MVP、MVVM 模式'
 date: '2021-03-30'
 tags: ['Design']
 draft: false
-summary: 
+summary: 文章介绍了 MVC、MVP、MVVM 模式，从历史背景、依赖关系、调用关系、优缺点等方面进行阐述。MVC 有 Controller 层，通过观察者模式同步 View 和 Model；MVP 用 Presenter 替代 Controller，View 提供接口给 Presenter 同步；MVVM 是特殊的 MVP，用双向数据绑定的 Binder 自动同步 View 和 Model，各有优劣，可提高可维护性和简化测试。 
 ---
 
 文章中会用MVX代表所有MV相关的设计模式，下图中的图示描述的模型并不是固定的，在不同的场景下会有一些差别，如：前端开发，客户端开发，手机端开发可能都不太一样，关键是理解这种设计思想。

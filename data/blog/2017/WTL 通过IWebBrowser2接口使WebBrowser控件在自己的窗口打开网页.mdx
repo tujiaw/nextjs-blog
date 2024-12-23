@@ -3,7 +3,7 @@ title: 'WTL 通过IWebBrowser2接口使WebBrowser控件在自己的窗口打开�
 date: '2017-04-15'
 tags: ['Windows', 'C/C++']
 draft: false
-summary: 
+summary: 在 WTL 中，为使 WebBrowser 控件在自己窗口打开网页，需添加 IWebBrowser2 控件，创建时勾选相关选项并插入控件。通过代码实现运行后打开默认网页及解决同一窗口打开网页问题，还需处理编译错误和运行时响应事件等。 
 ---
 
 遇到的问题是这样的， 在WTL中我用了一个WebBrowser控件来显示网页，但是在点击网页中的链接的时候经常跳到其他浏览器上去打开这个链接。我希望的是总是在我的这个控件上显示网页， 不要跳到其他浏览器上去打开。

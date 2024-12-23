@@ -3,7 +3,7 @@ title: 'nginx清理缓存'
 date: '2019-04-25'
 tags: ['Web', 'Linux']
 draft: false
-summary: 
+summary: 更新 js 文件后不生效，怀疑 nginx，重启仍有问题。放弃 nginx_ngx_cache_purge 模块，采用清理服务器上 nginx 缓存目录的方法，找到缓存目录 /var/ngcache 并删除，同时可重启 nginx 或强制杀死进程后启动，最后清理浏览器缓存即可。 
 ---
 
 更新js文件之后发现总是不生效，开始以为是浏览器缓存的原因，但是清理过之后甚至更换浏览器还是不生效。开始怀疑nginx了，于是重启nginx依旧有问题。最后只能求助搜索引擎了搜索清理nginx缓存的方法。

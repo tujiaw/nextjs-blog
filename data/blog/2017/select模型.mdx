@@ -3,7 +3,7 @@ title: 'select模型'
 date: '2017-10-24'
 tags: ['Windows']
 draft: false
-summary: 
+summary: 介绍 select 模型，需设 listenSock 为非阻塞，放入 fdread 中。每次 FD_SET 前要 FD_ZERO，用 list 保存 SOCKET 循环处理。在`_tmain`函数中创建套接字、绑定、监听等，通过 select 检测读写事件并处理客户端连接与数据收发。 
 ---
 
 需要注意的是要将listenSock设置为非阻塞模式，这样在while(1)循环中accept才不会被阻塞。同时listenSock也要set到fdread中，如果不这样做的话，select只能监视到客户端的socket，当客户端没有进行任务IO操作的时候select返回值为SOCKET_ERROR会一直进行循环检测，这样是没必要的。

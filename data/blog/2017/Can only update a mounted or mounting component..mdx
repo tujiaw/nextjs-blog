@@ -3,7 +3,7 @@ title: 'Can only update a mounted or mounting component.'
 date: '2017-02-22'
 tags: ['Mobile']
 draft: false
-summary: 
+summary: react native 中出现“Can only update a mounted or mounting component.”警告，因_countdown 方法中每秒递减秒数，组件 unmounted 后 timer 未停止。解决办法是在 componentWillUnmount 中 clearTimeout，修改后的代码片段如上。 
 ---
 
 react native Warning: setState(...): Can only update a mounted or mounting component.

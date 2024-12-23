@@ -3,7 +3,7 @@ title: '对char与wchar_t一些疑惑的理解'
 date: '2017-04-15'
 tags: ['Windows', 'C/C++']
 draft: false
-summary: 
+summary: 文章主要探讨 char 与 wchar_t，指出 char 存 ascii 码字符，wchar_t 存汉字等双字节字符。通过示例解释 char 存储汉字的原理及 memcpy_a 函数对 wchar_t 汉字串拷贝的方式，还提到用宽字符函数输出汉字需包含特定头文件和设置 locale。 
 ---
 
 对于char和wchar_t我们知道前者用来存储一个字节后者可以用来存储两个字节，所以像字母数字之类的ascii编码的字符都可以用char来存储。然而，汉字是需要两个字节才能存储的，所以用wchar_t才能符合我们的需求。但是我们经常看到char用于一些汉字方面的处理，这样就产生了一些疑惑， 如：

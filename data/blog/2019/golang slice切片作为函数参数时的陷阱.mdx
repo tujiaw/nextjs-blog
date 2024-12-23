@@ -3,7 +3,7 @@ title: 'golang slice切片作为函数参数时的陷阱'
 date: '2019-07-02'
 tags: ['Go']
 draft: false
-summary: 
+summary: Golang 中 slice 作为函数参数易掉陷阱。例 1 说明传参时 slice 被拷贝，函数内修改会影响原 slice；例 2 因 append 超出 cap 导致底层内存重分配及数据拷贝。正确方法是遵守规则，无返回参数不修改 slice，要修改则通过返回值返回，如需修改又不想改外值应深拷贝后再修改。 
 ---
 
 直接用例子说话  

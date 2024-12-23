@@ -3,7 +3,7 @@ title: 'linux C++内存优化'
 date: '2019-08-30'
 tags: ['Linux', 'C/C++']
 draft: false
-summary: 
+summary: 总结：linux C++内存释放后进程内存未降，因系统内存分配原理，mmap释放后归还给系统，brk释放后若高地址内存块未释放则低地址内存块不还。可用 malloc_trim(0)强制归还给系统，还可通过 mallopt 优化内存。 
 ---
 
 在linux上你会发现明明我的内存都释放了但是进程占用的内存还是没降下来，而在windows上就没有这种情况。这涉及到linux上内存分配原理（[参考](http://blog.sina.com.cn/s/blog_b4ef897e0102vg0l.html)）。

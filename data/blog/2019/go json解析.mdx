@@ -3,7 +3,7 @@ title: 'go json解析'
 date: '2019-05-12'
 tags: ['Go']
 draft: false
-summary: 
+summary: 文章介绍 go 解析 json 需先定义结构体，以获取豆瓣电影信息接口为例，定义了相应结构体 Response 并给出完整代码，通过 http.Get 获取接口数据，用 json.NewDecoder 解码后可获取并打印所需字段值，如 res.Subject[0].Rating 等。 
 ---
 
 由于go是静态强类型语言，不像JavaScript那样是动态语言，所以解析json的时候要先定义好解析后的结构体。

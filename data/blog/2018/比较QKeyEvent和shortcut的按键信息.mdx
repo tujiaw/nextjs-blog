@@ -3,7 +3,7 @@ title: '比较QKeyEvent和shortcut的按键信息'
 date: '2018-09-03'
 tags: ['C/C++', 'Qt']
 draft: false
-summary: 
+summary: 文章主要比较 QKeyEvent 和 shortcut 的按键信息，通过 setShortcut 给 button 设置快捷方式，用 QKeyEvent 的 modifiers 和 key 函数获取按键，将其转换为 QKeySequence 后与 shortcut 比较，经处理使格式一致，常见组合键判断没问题但不排除特殊情况。 
 ---
 
 QKeyEvent来自于键盘的按键事件，shortcut是快捷方式，这里我用setShortcut函数给button设置了一个快捷方式，现在我想比较QKeyEvent的按键与button的shortcut是否相同。

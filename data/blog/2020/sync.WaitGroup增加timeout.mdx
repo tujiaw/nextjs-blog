@@ -3,7 +3,7 @@ title: 'sync.WaitGroup增加timeout'
 date: '2020-04-29'
 tags: ['Go']
 draft: false
-summary: 
+summary: 文章介绍了使用 sync.WaitGroup 增加 timeout 的方法。通过封装 WaitGroup 实现超时机制，给出代码示例，测试时若超时时间大于任务时间则任务正常完成退出，小于则未执行完就退出。 
 ---
 
 要等待多个goroutine完成，我们可以使用sync.WaitGroup，但是它会一直等待，这里简单封装下增加超时机制。

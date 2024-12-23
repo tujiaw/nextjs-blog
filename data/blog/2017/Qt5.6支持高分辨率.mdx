@@ -3,7 +3,7 @@ title: 'Qt5.6支持高分辨率'
 date: '2017-02-03'
 tags: ['Qt']
 draft: false
-summary: 
+summary: Qt5.6 支持高分辨率，创建 QApplication 前加入特定代码即可。高分辨电脑需注意：别混用获取尺寸位置 API，nativeEvent 中 MSG 的 x,y 坐标需除以缩放比获取正确值。 
 ---
 
 Qt5.6及以后版本支持高分辨率很容易，在QApplication创建之前加入如下代码：
