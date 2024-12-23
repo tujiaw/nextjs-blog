@@ -40,11 +40,10 @@ systemctl restart nginx # 重启nginx
 ### shell
 ```
 curpath=$(cd `dirname $0`; pwd) # 将当前的绝对路径赋值给一个变量
-```
-> dirname $0，取得当前执行的脚本文件的父目录  
+dirname $0，取得当前执行的脚本文件的父目录  
 cd `dirname $0`，进入这个目录(切换当前工作目录)  
 pwd，显示当前工作目录(cd执行后的)  
-
+```
 
 # 查看运行进程所在目录
 如查看qpid进程  

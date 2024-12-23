@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient('https://fibmocuqjpkyzrzoydzq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpYm1vY3VxanBreXpyem95ZHpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ1MDcyODQsImV4cCI6MjA0MDA4MzI4NH0.q_MpIGXxxoRaBTJUBCI-D-lwyM-nt_-6Xlgp4re0e74')
+const supabase = createClient('https://fibmocuqjpkyzrzoydzq.supabase.co', '1yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpYm1vY3VxanBreXpyem95ZHpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ1MDcyODQsImV4cCI6MjA0MDA4MzI4NH0.q_MpIGXxxoRaBTJUBCI-D-lwyM-nt_-6Xlgp4re0e74')
 
 let time_caches = {}
 let title_caches = {}
