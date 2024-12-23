@@ -3,8 +3,7 @@
 import { Comments as CommentsComponent } from 'pliny/comments'
 import { useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
-import Giscus from '@giscus/react';
-
+import Giscus from '@giscus/react'
 
 export default function Comments({ slug }: { slug: string }) {
   const [loadComments, setLoadComments] = useState(false)

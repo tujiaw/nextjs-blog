@@ -36,7 +36,7 @@ summary: 分享 10 个 React 小模式，包括数据传递、修复 input 标�
 还需要注意:
 * 输入框应该通过onChange方法返回输入值。
 * 确保输入值的类型与onChange返回值的类型相同，如果typeof props.value的类型是number，那么就需要将e.target.value的类型转换成number。
-* 一组单选按钮的功能和```<Select>```一样，只是UI不同。可以在你的应用中统一成一个组件（比如<PickOneFromMany />），然后通过传递ui="radio" 或者 ui="dropDown"来区分。
+* 一组单选按钮的功能和```<Select>```一样，只是UI不同。可以在你的应用中统一成一个组件（比如```<PickOneFromMany />```），然后通过传递ui="radio" 或者 ui="dropDown"来区分。
 
 # 3.为input绑定唯一的ID
 我们会为input绑定唯一的ID，但是为每一个input定义一个唯一的ID很费事。
